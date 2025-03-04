@@ -1,4 +1,4 @@
-package org.example.cinema;
+package org.example.cinema.old;
 
 import org.example.cinema.infrasturcture.core.annotations.InitMethod;
 import org.example.cinema.infrasturcture.core.annotations.Property;

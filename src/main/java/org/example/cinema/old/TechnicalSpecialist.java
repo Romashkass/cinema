@@ -1,4 +1,4 @@
-package org.example.cinema;
+package org.example.cinema.old;
 
 public class TechnicalSpecialist {
     public static final int LOWER_LIMIT_MANUFACTURE_YEAR = 1886;

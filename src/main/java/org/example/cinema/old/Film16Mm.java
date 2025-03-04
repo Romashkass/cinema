@@ -1,11 +1,11 @@
-package org.example.cinema;
+package org.example.cinema.old;
 
-public class Film32Mm extends AbstractFilmType{
+public class Film16Mm extends AbstractFilmType {
     private double speed;
     private double capacity;
 
-    public Film32Mm(double speed, double capacity) {
-        super("32 mm", 0.3);
+    public Film16Mm(double speed, double capacity) {
+        super("16 mm", 0.2);
         this.speed = speed;
         this.capacity = capacity;
     }

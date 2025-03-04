@@ -1,12 +1,8 @@
-package org.example.cinema;
+package org.example.cinema.old;
 
 import org.example.cinema.infrasturcture.core.annotations.Autowired;
 import org.example.cinema.infrasturcture.core.annotations.InitMethod;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class FilmsCollection {

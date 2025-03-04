@@ -1,4 +1,4 @@
-package org.example.cinema;
+package org.example.cinema.old;
 
 public class Film8Mm extends AbstractFilmType {
     private double speed;

@@ -1,4 +1,4 @@
-package org.example.cinema;
+package org.example.cinema.old;
 
 public enum Color {
     BLACK_WHITE,

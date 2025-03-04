@@ -18,6 +18,10 @@ public class CinemaMain {
 
 //        fill(context);
 //        test(context);
+        Courier courier = context.getObject(Courier.class);
+        courier.moviesToMaintenance(context);
+        while (true){}
+        //        Thread.sleep(120000);
     }
 
     private static void test(ApplicationContext context) {

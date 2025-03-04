@@ -1,4 +1,4 @@
-package org.example.cinema;
+package org.example.cinema.old;
 
 public abstract class AbstractFilmType implements Taxable {
     private String filmTypeName;
