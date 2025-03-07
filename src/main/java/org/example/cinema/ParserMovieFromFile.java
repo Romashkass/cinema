@@ -1,7 +1,11 @@
-package org.example.cinema.old;
+package org.example.cinema;
 
 import org.example.cinema.infrasturcture.core.annotations.InitMethod;
 import org.example.cinema.infrasturcture.core.annotations.Property;
+import org.example.cinema.old.Color;
+import org.example.cinema.old.Film;
+import org.example.cinema.old.FilmType;
+import org.example.cinema.old.Rent;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -29,7 +33,6 @@ public class ParserMovieFromFile {
 
     @InitMethod
     public void init() {
-        //TODO: ???
     }
 
     public void loadFiles(List<FilmType> filmTypes, List<Film> films, List<Rent> rents) {

@@ -1,5 +1,17 @@
 package org.example.cinema;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.catalina.Context;
+import org.apache.catalina.LifecycleException;
+import org.apache.catalina.WebResourceRoot;
+import org.apache.catalina.core.StandardContext;
+import org.apache.catalina.startup.Tomcat;
+import org.apache.catalina.webresources.JarResourceSet;
+import org.apache.catalina.webresources.StandardRoot;
 import org.example.cinema.entity.Genre;
 import org.example.cinema.entity.Movie;
 import org.example.cinema.entity.Rent;
@@ -8,10 +20,31 @@ import org.example.cinema.service.GenreService;
 import org.example.cinema.service.MovieService;
 import org.example.cinema.service.RentService;
 
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.util.*;
 
 public class CinemaMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+//        doConsoleActions();
+        runTomcat();
+    }
+
+    public static void runTomcat() throws LifecycleException {
+        Tomcat tomcat = new Tomcat();
+        tomcat.setPort(8080);
+        tomcat.getConnector();
+
+        String webappDirLocation = "src/main/webapp";
+        Context context = tomcat.addWebapp("", new File(webappDirLocation).getAbsolutePath());
+
+        tomcat.start();
+        tomcat.getServer().await();
+    }
+
+    private static void doConsoleActions() {
         ApplicationContext context = new ApplicationContext("org.example.cinema", new HashMap<>());
         MoviesCollection collection = context.getObject(MoviesCollection.class);
         collection.display();

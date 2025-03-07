@@ -1,5 +1,6 @@
 package org.example.cinema.old;
 
+import org.example.cinema.ParserMovieFromFile;
 import org.example.cinema.infrasturcture.core.annotations.Autowired;
 import org.example.cinema.infrasturcture.core.annotations.InitMethod;
 
