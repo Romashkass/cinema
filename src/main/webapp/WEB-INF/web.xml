@@ -6,13 +6,12 @@
 
     <display-name>Cinema webapp</display-name>
 
-    <servlet>
-        <servlet-name>test</servlet-name>
-        <servlet-class>org.example.cinema.TestServlet</servlet-class>
-    </servlet>
+    <welcome-file-list>
+        <welcome-file>resources/index.html</welcome-file>
+    </welcome-file-list>
 
     <servlet-mapping>
-        <servlet-name>test</servlet-name>
-        <url-pattern>/test</url-pattern>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/resources/*</url-pattern>
     </servlet-mapping>
 </web-app>

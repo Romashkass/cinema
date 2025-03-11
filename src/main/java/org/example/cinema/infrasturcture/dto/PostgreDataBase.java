@@ -233,7 +233,7 @@ public class PostgreDataBase {
     }
 
     public <T> Optional<T> get(Long id, Class<T> clazz) {
-        if (clazz.isAnnotationPresent(Table.class)) {
+        if (!clazz.isAnnotationPresent(Table.class)) {
             throw new RuntimeException("No @Table annotation on class " + clazz.getName());
         }
         Table table = clazz.getAnnotation(Table.class);
