@@ -13,13 +13,10 @@
     <%@ page import="java.util.concurrent.atomic.AtomicReference"%>
     <%@ page import="java.util.function.Predicate"%>
     <%@ page import="java.util.Comparator"%>
-    <%@ page import="org.example.cinema.entity.Genre"%>
-    <%@ page import="org.example.cinema.entity.Movie"%>
-    <%@ page import="org.example.cinema.entity.Rent"%>
+    <%@ page import="org.example.cinema.entity.dto.MovieDTO"%>
 
     <%
-        List<Movie> movies = (List<Movie>) request.getAttribute("movies");
-        List<Genre> genres = (List<Genre>) request.getAttribute("genres");
+        List<MovieDTO> movies = (List<MovieDTO>) request.getAttribute("movies");
     %>
 
     <div class="center flex full-vh">
@@ -41,12 +38,12 @@
                 <%if (movies.size()==0) {%>
                     <tr><td colspan="10">Нет фильмов соответствующих параметрам</td></tr>
                 <%}%>
-                <%for(Movie movie : movies) {%>
+                <%for(MovieDTO movie : movies) {%>
                     <tr>
                         <td><%=movie.getId()%></td>
                         <td><%=movie.getTitle()%></td>
                         <td><%=movie.getYear()%></td>
-                        <td><%=genres.stream().filter(genre -> genre.getId().equals(movie.getGenreId())).findFirst().orElse(null).getName()%></td>
+                        <td><%=movie.getGenreName()%></td>
                         <td>true</td>
                     </tr>
                 <%}%>

@@ -13,14 +13,12 @@
     <%@ page import="java.util.concurrent.atomic.AtomicReference"%>
     <%@ page import="java.util.function.Predicate"%>
     <%@ page import="java.util.Comparator"%>
-    <%@ page import="org.example.cinema.entity.Genre"%>
-    <%@ page import="org.example.cinema.entity.Movie"%>
-    <%@ page import="org.example.cinema.entity.Rent"%>
+    <%@ page import="org.example.cinema.entity.dto.MovieDTO"%>
+    <%@ page import="org.example.cinema.entity.dto.RentDTO"%>
 
     <%
-        List<Movie> movies = (List<Movie>) request.getAttribute("movies");
-        List<Rent> rents = (List<Rent>) request.getAttribute("rents");
-        List<Genre> genres = (List<Genre>) request.getAttribute("genres");
+        List<MovieDTO> movies = (List<MovieDTO>) request.getAttribute("movies");
+        List<RentDTO> rents = (List<RentDTO>) request.getAttribute("rents");
     %>
 
     <div class="center flex full-vh">
@@ -42,13 +40,13 @@
                 <%if (movies.size()==0) {%>
                     <tr><td colspan="10">Нет фильмов соответствующих параметрам</td></tr>
                 <%}%>
-                <%for(Movie movie : movies) {%>
+                <%for(MovieDTO movie : movies) {%>
                     <tr>
                         <td><%=movie.getId()%></td>
                         <td><%=movie.getTitle()%></td>
                         <td><%=movie.getYear()%></td>
-                        <td><%=genres.stream().filter(genre -> genre.getId().equals(movie.getGenreId())).findFirst().orElse(null).getName()%></td>
-                        <td><%=rents.stream().filter(rent -> rent.getMovieId().equals(movie.getId())).mapToDouble(Rent::getPrice).sum()%></td>
+                        <td><%=movie.getGenreName()%></td>
+                        <td><%=rents.stream().filter(rent -> rent.getMovieId().equals(movie.getId())).mapToDouble(RentDTO::getPrice).sum()%></td>
                     </tr>
                 <%}%>
             </table>
@@ -56,7 +54,7 @@
             <hr />
             <br />
             <div>
-                Сумма: <%=rents.stream().mapToDouble(Rent::getPrice).sum()%>
+                Сумма: <%=rents.stream().mapToDouble(RentDTO::getPrice).sum()%>
             </div>
         </div>
     </div>

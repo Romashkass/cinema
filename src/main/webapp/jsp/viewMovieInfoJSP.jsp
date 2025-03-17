@@ -13,14 +13,12 @@
     <%@ page import="java.util.concurrent.atomic.AtomicReference"%>
     <%@ page import="java.util.function.Predicate"%>
     <%@ page import="java.util.Comparator"%>
-    <%@ page import="org.example.cinema.entity.Genre"%>
-    <%@ page import="org.example.cinema.entity.Movie"%>
-    <%@ page import="org.example.cinema.entity.Rent"%>
+    <%@ page import="org.example.cinema.entity.dto.MovieDTO"%>
+    <%@ page import="org.example.cinema.entity.dto.RentDTO"%>
 
     <%
-        Movie movie = (Movie) request.getAttribute("movie");
-        List<Rent> rents = (List<Rent>) request.getAttribute("rents");
-        Genre genre = (Genre) request.getAttribute("genre");
+        MovieDTO movie = (MovieDTO) request.getAttribute("movie");
+        List<RentDTO> rents = (List<RentDTO>) request.getAttribute("rents");
     %>
 
     <div class="center flex full-vh">
@@ -46,7 +44,7 @@
                     <td><%=movie.getId()%></td>
                     <td><%=movie.getTitle()%></td>
                     <td><%=movie.getYear()%></td>
-                    <td><%=genre.getName()%></td>
+                    <td><%=movie.getGenreName()%></td>
                 </tr>
             </table>
             <br />
@@ -63,10 +61,10 @@
                 <%if (rents.size()==0) {%>
                     <tr><td colspan="10">Этот фильм не арендовали</td></tr>
                 <%}%>
-                <%for(Rent rent : rents) {%>
+                <%for(RentDTO rent : rents) {%>
                     <tr>
                         <td><%=rent.getId()%></td>
-                        <td><%=movie.getTitle()%></td>
+                        <td><%=rent.getMovieTitle()%></td>
                         <td><%=rent.getDate()%></td>
                         <td><%=rent.getPrice()%></td>
                     </tr>
@@ -76,7 +74,7 @@
             <hr />
             <br />
             <div>
-                Сумма: <%=rents.stream().mapToDouble(Rent::getPrice).sum()%>
+                Сумма: <%=rents.stream().mapToDouble(RentDTO::getPrice).sum()%>
             </div>
         </div>
     </div>

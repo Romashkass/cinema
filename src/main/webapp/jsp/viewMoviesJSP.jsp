@@ -13,21 +13,19 @@
     <%@ page import="java.util.concurrent.atomic.AtomicReference"%>
     <%@ page import="java.util.function.Predicate"%>
     <%@ page import="java.util.Comparator"%>
-    <%@ page import="org.example.cinema.entity.Genre"%>
-    <%@ page import="org.example.cinema.entity.Movie"%>
+    <%@ page import="org.example.cinema.entity.dto.MovieDTO"%>
 
     <%
-        List<Movie> movies = (List<Movie>) request.getAttribute("movies");
-        List<Genre> genres = (List<Genre>) request.getAttribute("genres");
+        List<MovieDTO> movies = (List<MovieDTO>) request.getAttribute("movies");
 
-        Set<String> uniqueGenres = genres.stream().map(Genre::getName).collect(Collectors.toSet());
-        Set<String> uniqueTitles = movies.stream().map(Movie::getTitle).collect(Collectors.toSet());
+        Set<String> uniqueGenres = movies.stream().map(MovieDTO::getGenreName).collect(Collectors.toSet());
+        Set<String> uniqueTitles = movies.stream().map(MovieDTO::getTitle).collect(Collectors.toSet());
         Set<String> uniqueYears = movies.stream().map(movie -> String.valueOf(movie.getYear())).collect(Collectors.toSet());
 
-        AtomicReference<Predicate<Movie>> filter = new AtomicReference<>(movie -> true);
+        AtomicReference<Predicate<MovieDTO>> filter = new AtomicReference<>(movie -> true);
 
         Optional.ofNullable(request.getParameter("genre")).filter(s -> !s.isEmpty()).ifPresent(s -> {
-           filter.set(filter.get().and(movie -> genres.stream().filter(genre -> genre.getId().equals(movie.getGenreId())).findFirst().orElse(null).getName().equals(s)));
+           filter.set(filter.get().and(movie -> movie.getGenreName().equals(s)));
         });
 
         Optional.ofNullable(request.getParameter("title")).filter(s -> !s.isEmpty()).ifPresent(s -> {
@@ -61,12 +59,12 @@
                 <%if (movies.size()==0) {%>
                     <tr><td colspan="10">Нет фильмов соответствующих параметрам</td></tr>
                 <%}%>
-                <%for(Movie movie : movies) {%>
+                <%for(MovieDTO movie : movies) {%>
                     <tr>
                         <td><%=movie.getId()%></td>
                         <td><%=movie.getTitle()%></td>
                         <td><%=movie.getYear()%></td>
-                        <td><%=genres.stream().filter(genre -> genre.getId().equals(movie.getGenreId())).findFirst().orElse(null).getName()%></td>
+                        <td><%=movie.getGenreName()%></td>
                         <td><a href="<%="/info?id=" + movie.getId()%>">&#x1F4C3;</a></td>
                     </tr>
                 <%}%>

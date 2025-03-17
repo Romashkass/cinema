@@ -8,7 +8,7 @@
 <body>
     <%@ page import="java.util.List"%>
     <%@ page import="java.util.Comparator"%>
-    <%@ page import="org.example.cinema.entity.Genre"%>
+    <%@ page import="org.example.cinema.entity.dto.GenreDTO"%>
 
     <%
         String sortKey = null;
@@ -47,8 +47,8 @@
                     <th>Name</th>
                 </tr>
                 <%
-                    List<Genre> genres = (List<Genre>) request.getAttribute("genres");
-                    Comparator<Genre> comparator = null;
+                    List<GenreDTO> genres = (List<GenreDTO>) request.getAttribute("genres");
+                    Comparator<GenreDTO> comparator = null;
                     if (sortKey != null && sortKey.equals("name")) {
                         comparator = Comparator.comparing(genre -> genre.getName());
                     }
@@ -59,7 +59,7 @@
                         genres.sort(comparator);
                     }
                 %>
-                <%for(Genre genre : genres) {%>
+                <%for(GenreDTO genre : genres) {%>
                     <tr>
                         <td><%=genre.getId()%></td>
                         <td><%=genre.getName()%></td>
